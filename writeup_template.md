@@ -21,12 +21,12 @@ The goals / steps of this project are the following:
 
 [image1]: ./1.png "Visualization"
 [image2]: ./2.png "Histogram"
-[image3]: ./examples/random_noise.jpg "Random Noise"
-[image4]: ./examples/placeholder.png "Traffic Sign 1"
-[image5]: ./examples/placeholder.png "Traffic Sign 2"
-[image6]: ./examples/placeholder.png "Traffic Sign 3"
-[image7]: ./examples/placeholder.png "Traffic Sign 4"
-[image8]: ./examples/placeholder.png "Traffic Sign 5"
+
+[image3]: ./test/60_kmh.jpg "60_kmh.jpg"
+[image4]: ./test/left_turn.jpeg "left_turn.jpeg"
+[image5]: ./test/road_work.jpg "Traffic Sign 2"
+[image6]: ./test/stop_sign.jpg "Traffic Sign 3"
+[image7]: ./test/yield_sign.jpg "Traffic Sign 4"
 
 
 Here is a link to my [project code](./Traffic_Sign_Classifier-Copy1.ipynb.ipynb)
@@ -104,4 +104,32 @@ My final model results were:
 * test set accuracy of 92.57 %
 
 
+#### 5. Probabilities  of images and classes
  
+![alt text][image3]
+
+Image 0 probabilities: [10.616723    3.8455713   2.669806    2.2186196   0.87587404] 
+ and predicted classes: [14  0 34 38 15]
+
+![alt text][image4]
+
+Image 1 probabilities: [16.987305    8.380401    4.820599    2.2235348   0.91358745] 
+ and predicted classes: [38 34 13 14 15]
+
+
+![alt text][image5]
+
+Image 2 probabilities: [ 5.0054965   4.6089253   1.2927918  -0.76526076 -1.203482  ] 
+ and predicted classes: [10  9  3  5 35]
+
+
+![alt text][image6]
+
+Image 3 probabilities: [27.546165  15.932422   2.9358974  2.172908  -0.5163945] 
+ and predicted classes: [13 38 15  2 35]
+
+
+![alt text][image7]
+
+Image 4 probabilities: [8.483552  8.009216  2.5893536 2.302762  2.0210102] 
+ and predicted classes: [29 18 40 37 12]

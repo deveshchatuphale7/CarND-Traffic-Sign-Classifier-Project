@@ -22,14 +22,16 @@ The goals / steps of this project are the following:
 [image1]: ./1.png "Visualization"
 [image2]: ./2.png "Histogram"
 
-[image3]: ./test/60_kmh.jpg "60_kmh.jpg"
-[image4]: ./test/left_turn.jpeg "left_turn.jpeg"
-[image5]: ./test/road_work.jpg "Traffic Sign 2"
-[image6]: ./test/stop_sign.jpg "Traffic Sign 3"
-[image7]: ./test/yield_sign.jpg "Traffic Sign 4"
+[lenet]: ./lenet.png "lenet"
+
+[60_kmh]: ./test/60_kmh.jpg "60_kmh.jpg"
+[left_turn]: ./test/left_turn.jpeg "left_turn.jpeg"
+[road_work]: ./test/road_work.jpg "road_work"
+[stop_sign]: ./test/stop_sign.jpg "stop_sign"
+[yield_sign]: ./test/yield_sign.jpg "yield_sign"
 
 
-Here is a link to my [project code](./Traffic_Sign_Classifier-Copy1.ipynb.ipynb)
+Here is a link to my [project code](./Traffic_Sign_Classifier-Copy1.ipynb)
 
 ### Data Set Summary & Exploration
 
@@ -45,9 +47,11 @@ signs data set:
 
 #### 2. Include an exploratory visualization of the dataset.
 
-Here is an exploratory visualization of the data set. It is a bar chart showing how the data ...
+Here is an exploratory visualization of the data set. 
 
 ![alt text][image1]
+
+The histogram below shows count of each label in the dataset. 
 
 ![alt text][image2]
 
@@ -90,46 +94,73 @@ My final model consisted of the following layers:
 #### 3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
 To train the model, I used an 'tf.train.AdamOptimizer()' as I found it useful in LeNet 5 assignment as well.I set batch size of 150 with 
-number of epochs 10
+number of epochs 10.I also used ADAM stochiastic optimizer 'optimizer = tf.train.AdamOptimizer(learning_rate = rate)' with learning rate 0.005.
+I set batch size to 150, I tested with batch size of 100 & 200 above, but I got the better accuracy at 150.
+I kept number of epochs as 10 as I observed that validation accuracy wasn't increasing significantly above number of 10 epochs 
 
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
+![alt text][lenet]
+
+
 I also shuffled the data set in order to randomly distribute test images with different classes in train,test and validation data
 for that I used 'shuffle()' from sklearn library
-
-
 
 My final model results were:
 * training set accuracy of 98.3 %
 * test set accuracy of 92.57 %
 
 
+As the CNN with 2 convolutional layers, 3 fully connected, a learning rate of 0.005 and a batch size 150 appears to result in the optimal CNN,
+ I utilized this for the final model as I found this existing LeNet architecture was able to predict digits with great accuracy in the LeNet labs. after testing and playing around with this parameters.
+ I also used ADAM stochiastic optimizer 'optimizer = tf.train.AdamOptimizer(learning_rate = rate)' with learning rate 0.005, for this I referenced LeNet lecture notes & lab code. Along with that I also added dropout layer not to overfit the data.
+ I initialy kept learning rate around 0.009 & as a result the accuracy of model on training set was around 85 %. So in order to keep model stable & increase training set accuracy I kept on reducing the learning rate and finally set to 0.005. 
+
+
 #### 5. Probabilities  of images and classes
  
-![alt text][image3]
+
+
+![alt text][stop_sign]
 
 Image 0 probabilities: [10.616723    3.8455713   2.669806    2.2186196   0.87587404] 
  and predicted classes: [14  0 34 38 15]
 
-![alt text][image4]
+![alt text][left_turn]
 
 Image 1 probabilities: [16.987305    8.380401    4.820599    2.2235348   0.91358745] 
  and predicted classes: [38 34 13 14 15]
 
 
-![alt text][image5]
+![alt text][60_kmh]
 
 Image 2 probabilities: [ 5.0054965   4.6089253   1.2927918  -0.76526076 -1.203482  ] 
  and predicted classes: [10  9  3  5 35]
 
 
-![alt text][image6]
+![alt text][yield_sign]
 
 Image 3 probabilities: [27.546165  15.932422   2.9358974  2.172908  -0.5163945] 
  and predicted classes: [13 38 15  2 35]
 
 
-![alt text][image7]
+![alt text][road_work]
 
 Image 4 probabilities: [8.483552  8.009216  2.5893536 2.302762  2.0210102] 
  and predicted classes: [29 18 40 37 12]
+
+
+
+
+As from the above predicted classes I observed that model was not able to clearly distinguish between speed signs
+The model was able to detect that it is a speed sign but the value predicted was wrong.
+
+For second image which is keep left sign image the model predicted it as keep right sign turn.
+Here model failed to predict exact sign however the keep right sign is second in the predicted classes list.
+
+For the stop sign image & yield sign image, the model was able to successfully predict both of the signs. 
+
+For the road work sign image the model predicted it as Bicycles crossing here, what I observed is model detected the shape of the sign image correctly but failed to predict it based on the actual content in the sign maybe because of complex nature of picture/action in the sign.
+
+So overall, model predicted 2 out of 5 images successfully, for rest of the images model was closer to identify the sign & predicted classes were
+closer to actual sign image classes, model worked correctly on 40% of additional pictures as compared to 93% accuracy on test data, model failed to recognize the detailed content in the sign which in my opinion can be improved by increasing number of layers in CNN. or by increasing the dataset for some complex signs.Also I feel there is a need to consider other characteristics like image of sign in different seasons, during different daytimes, image of sign with different angles & dimensions,size, background of the sign, position of sign in the image etc.  
